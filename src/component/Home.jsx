@@ -24,7 +24,7 @@ function Home() {
       setParagraph((p) => [...p, word]);
       setWord([]);
       setCharIndex(0);
-      ReadText(allword[paragraph.length + 1]);
+      ReadText(allword[paragraph.length]);
       e.target.value = "";
       return;
     }
