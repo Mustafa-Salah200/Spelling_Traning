@@ -42,7 +42,7 @@ function Home() {
             type="text"
             placeholder="Start Your Test "
           />
-          <button className="read" onClick={ReadText}>
+          <button className="read" onClick={ReadText(allword[paragraph.length + 1])}>
             Read
           </button>
         </div>
