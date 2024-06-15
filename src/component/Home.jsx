@@ -24,7 +24,7 @@ function Home() {
       setParagraph((p) => [...p, word]);
       setWord([]);
       setCharIndex(0);
-      ReadText(allword[paragraph.length]);
+      ReadText(allword[paragraph.length + 1]);
       e.target.value = "";
       return;
     }
@@ -42,7 +42,7 @@ function Home() {
             type="text"
             placeholder="Start Your Test "
           />
-          <button className="read" onClick={() => ReadText(allword[paragraph.length + 1])}>
+          <button className="read" onClick={() => ReadText(allword[paragraph.length])}>
             Read
           </button>
         </div>
