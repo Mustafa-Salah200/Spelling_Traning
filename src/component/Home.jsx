@@ -12,8 +12,8 @@ function Home() {
 
   const { mainStyle } = useContext(StyleProvider);
 
-  function ReadText(word) {
-    let utterance = new SpeechSynthesisUtterance(word);
+  function ReadText(w) {
+    let utterance = new SpeechSynthesisUtterance(w);
     speechSynthesis.speak(utterance);
   }
   function OnWrite(e) {
