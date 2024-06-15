@@ -40,7 +40,7 @@ function Home() {
             className="text"
             onChange={OnWrite}
             type="text"
-            placeholder="Start Your Test "
+            placeholder="Start Your Test.. "
           />
           <button className="read" onClick={ReadText(allword[paragraph.length + 1])}>
             Read
