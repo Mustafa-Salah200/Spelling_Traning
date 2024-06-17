@@ -11,17 +11,16 @@ function Home() {
   const allword = activeStory.text.split(" ");
 
   const { mainStyle } = useContext(StyleProvider);
-
   function ReadText(w) {
     let utterance = new SpeechSynthesisUtterance(w);
     speechSynthesis.speak(utterance);
   }
   function OnWrite(e) {
     const value = e.target.value;
-    setWord(e.target.value);
+    value !== " " && setWord(e.target.value);
     setCharIndex(value.length);
     if (value[charIndex] === " ") {
-      setParagraph((p) => [...p, word]);
+      value !== " " && setParagraph((p) => [...p, word]);
       setWord([]);
       setCharIndex(0);
       ReadText(allword[paragraph.length + 1]);
@@ -32,6 +31,11 @@ function Home() {
   useEffect(() => {
     ReadText(allword[0]);
   }, []);
+  useEffect(() => {
+    setWord([]);
+    setCharIndex(0);
+    setParagraph([]);
+  }, [activeStory]);
   return (
     <div>
       {paragraph.length < allword.length && (
@@ -42,12 +46,22 @@ function Home() {
             type="text"
             placeholder="Start Your Test "
           />
-          <button className="read" onClick={() => ReadText(allword[paragraph.length])}>
+          <button
+            className="read"
+            onClick={ReadText(allword[paragraph.length])}
+          >
             Read
           </button>
         </div>
       )}
-      <div className="content">
+      <div
+        className="content"
+        style={{
+          alignContent: paragraph.length < allword.length && "end",
+          maxHeight: paragraph.length < allword.length && "160px",
+          overflowY: paragraph.length < allword.length && "scroll",
+        }}
+      >
         {paragraph.map((ele, index) => {
           return (
             <span
@@ -57,12 +71,13 @@ function Home() {
                 fontSize: mainStyle.fontSize,
                 color:
                   ele !== " "
-                    ? allword[index] !== ele &&
-                      allword[index] !== `${ele}.` &&
-                      allword[index] !== `${ele},` &&
-                      allword[index].toLowerCase() !== ele &&
-                      allword[index].toLowerCase() !== `${ele},` &&
-                      allword[index].toLowerCase() !== `${ele}.` &&
+                    ? allword[index].toLowerCase() !== ele.toLowerCase() &&
+                      allword[index].toLowerCase() !==
+                        `${ele.toLowerCase()},` &&
+                      allword[index].toLowerCase() !==
+                        `${ele.toLowerCase()}!` &&
+                      allword[index].toLowerCase() !==
+                        `${ele.toLowerCase()}.` &&
                       "#F44336"
                     : "#F44336",
               }}
