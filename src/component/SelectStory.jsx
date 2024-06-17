@@ -23,6 +23,7 @@ function SelectStory() {
       return ele.title === e.target.innerHTML;
     });
     SetActive(active);
+    navogate("/");
   };
   useEffect(() => {
     const handler = (event) => {
