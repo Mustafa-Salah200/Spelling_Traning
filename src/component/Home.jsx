@@ -48,7 +48,9 @@ function Home() {
           />
           <button
             className="read"
-            onClick={ReadText(allword[paragraph.length])}
+            onClick={() => {
+              ReadText(allword[paragraph.length])}
+            }
           >
             Read
           </button>
