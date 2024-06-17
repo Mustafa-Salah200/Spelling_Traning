@@ -1,5 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { StoriesProvider } from "../Context/Stories";
+import { useNavigate } from "react-router-dom";
 
 function SelectStory() {
   const [show, setShow] = useState(false);
@@ -7,11 +8,14 @@ function SelectStory() {
   const { SetActive } = useContext(StoriesProvider);
   const { activeStory } = useContext(StoriesProvider);
   const [story, setStory] = useState(activeStory.title || "SelectStory");
+  const navogate = useNavigate();
 
   const refEle = useRef();
   const Show = () => {
     show ? setShow(false) : setShow(true);
+    navogate("/stories");
   };
+
   const SetStory = (e) => {
     setStory(e.target.innerHTML);
     setShow(false);
